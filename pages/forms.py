@@ -5,7 +5,7 @@ from topo_proxy.tunnels.facebook import FacebookAPI
 
 
 class ConfigForm(forms.ModelForm):
-    
+
     class Meta:
         model = Config
         fields = ('remote_account', 'local_account', 'delay', 'timeout',)
@@ -16,10 +16,10 @@ class ConfigForm(forms.ModelForm):
 
         if len(metadata) != 2:
             raise ValidationError("Should look like 'usernme:password'")
-        
+
         email, password = metadata
         fb = FacebookAPI()
-        
+
         try:
             fb.login(email, password)
         except Exception as e:
@@ -33,4 +33,3 @@ class ConfigForm(forms.ModelForm):
 
     def clean_local_account(self):
         return self.clean_account('local_account')
-

@@ -12,12 +12,15 @@ class Config(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     remote_account = models.CharField(max_length=64)
     local_account = models.CharField(max_length=64)
-    delay = models.FloatField(default=1.0, validators=[MinValueValidator(1), MaxValueValidator(5)])
-    timeout = models.FloatField(default=60.0, validators=[MinValueValidator(1), MaxValueValidator(60)])
+    delay = models.FloatField(default=1.0, validators=[
+            MinValueValidator(1), MaxValueValidator(5)
+    ])
+    timeout = models.FloatField(default=60.0, validators=[
+        MinValueValidator(1), MaxValueValidator(60)
+    ])
     last_ping = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=False)
-    
-    
+
     class Meta:
         constraints = [
             UniqueConstraint(
@@ -32,4 +35,3 @@ class Config(models.Model):
             i.split(':')[0]
             for i in (self.remote_account, self.local_account)
         ]
-

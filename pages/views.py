@@ -25,8 +25,11 @@ def ping(request):
     delay = 60 - int(time.time() - last_ping)
 
     if delay > 0:
-    	response = {
-            "message": f"Please, you should wait for {delay}s before your next ping!",
+        response = {
+            "message": (
+                f"Please, you should wait for {delay}s"
+                "before your next ping!"
+            ),
             "type": "is-warning"
         }
     else:
@@ -63,7 +66,9 @@ def ping(request):
 def get_config(request):
     configs = Config.objects.filter(owner=request.user)
 
-    return render(request, 'pages/index.html', {'configs': configs})
+    return render(
+        request, 'pages/index.html', {'configs': configs})
+
 
 @login_required
 def new_config(request):
@@ -75,18 +80,19 @@ def new_config(request):
             form.instance.owner = request.user
             form.save()
             messages.success(request, 'New configuration added.')
-            
+
             return redirect(get_config)
         else:
             messages.error(request, 'Configuration invalid.')
     else:
         form = ConfigForm()
 
-    return render(request, 'pages/new_config.html', {'form': form})
+    return render(
+        request, 'pages/new_config.html', {'form': form})
+
 
 @login_required
 def drop_config(request, pk):
     Config.objects.filter(pk=pk).delete()
 
     return redirect(get_config)
-
