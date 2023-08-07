@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Configurations{% endblock %}
+
+{% block content %}
+<h2 class="title">Configurations</h2>
+<a href="{% url 'new-config' %}" class="button is-primary">New configuration</a><br><br>
+<div class="field is-grouped is-grouped-multiline">
+{% for config in configs %}
+	<div class="control">
+		<div class="tags has-addons">
+			{% with config.get_pair as config_pair %}
+			<span class="tag is-link">{{ config_pair.0 }}</span>
+			<span class="tag is-secondary">:</span>
+			<span class="tag is-info">{{ config_pair.1 }}</span>
+			{% endwith %}
+			<a class="tag is-delete is-danger" href="{% url 'drop-config' config.pk  %}"></a>
+		</div>
+	</div>
+{% empty %}
+	<p class="subtitle">No configuration for the moment.</p>
+{% endfor %}
+</div>
+{% endblock %}
