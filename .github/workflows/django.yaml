@@ -45,7 +45,7 @@ jobs:
         echo "allowed_hosts=" >> .env
         echo "internal_ips=" >> .env
         echo "maintenance_mode=false" >> .env
-        echo "maintenance_mode_ignore_urls=" >> .env
+        echo "maintenance_ignore_urls=" >> .env
     - name: Run migrations
       run: |
         python manage.py makemigrations
