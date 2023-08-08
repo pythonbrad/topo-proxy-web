@@ -46,6 +46,7 @@ jobs:
         echo "internal_ips=" >> .env
         echo "maintenance_mode=false" >> .env
         echo "maintenance_ignore_urls=" >> .env
+        echo "facebook_forward_proxy=127.0.0.1:5000" >> .env
     - name: Run migrations
       run: |
         python manage.py makemigrations
