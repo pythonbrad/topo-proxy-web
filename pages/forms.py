@@ -8,14 +8,16 @@ class ConfigForm(forms.ModelForm):
 
     class Meta:
         model = Config
-        fields = ('remote_account', 'local_account', 'delay', 'timeout',)
+        fields = (
+            'remote_account', 'local_account', 'txdelay',
+            'rxdelay', 'timeout',)
 
     def clean_account(self, key):
         data = self.cleaned_data[key]
         metadata = data.split(':', 1)
 
         if len(metadata) != 2:
-            raise ValidationError("Should look like 'usernme:password'")
+            raise ValidationError("Should look like 'username:password'")
 
         email, password = metadata
         fb = FacebookAPI()

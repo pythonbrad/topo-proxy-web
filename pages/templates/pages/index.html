@@ -13,6 +13,8 @@
 			<span class="tag is-link">{{ config_pair.0 }}</span>
 			<span class="tag is-secondary">:</span>
 			<span class="tag is-info">{{ config_pair.1 }}</span>
+			<span class="tag is-secondary">{% if config.process_id %}On{% else %}Off{% endif %}</span>
+			<a class="tag is-warning" href="{% url 'reload-config' config.pk %}">↻</a>
 			{% endwith %}
 			<a class="tag is-delete is-danger" href="{% url 'drop-config' config.pk  %}"></a>
 		</div>

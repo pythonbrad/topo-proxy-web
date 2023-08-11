@@ -12,14 +12,18 @@ class Config(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     remote_account = models.CharField(max_length=64)
     local_account = models.CharField(max_length=64)
-    delay = models.FloatField(default=1.0, validators=[
+    txdelay = models.FloatField(default=2.0, validators=[
             MinValueValidator(1), MaxValueValidator(5)
     ])
+    rxdelay = models.FloatField(default=5.0, validators=[
+            MinValueValidator(1), MaxValueValidator(5)
+    ])
+
     timeout = models.FloatField(default=60.0, validators=[
-        MinValueValidator(1), MaxValueValidator(60)
+        MinValueValidator(1), MaxValueValidator(3600)
     ])
     last_ping = models.DateTimeField(auto_now=True)
-    status = models.BooleanField(default=False)
+    process_id = models.IntegerField(default=0)
 
     class Meta:
         constraints = [

@@ -9,4 +9,5 @@ urlpatterns = [
     path("my-config/", views.get_config, name="my-config"),
     path("new-config/", views.new_config, name="new-config"),
     path("drop-config/<int:pk>", views.drop_config, name="drop-config"),
+    path("reload-config/<int:pk>", views.reload_config, name="reload-config"),
 ]

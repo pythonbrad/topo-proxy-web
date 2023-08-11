@@ -82,14 +82,12 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     "default": {
-        "NAME": "db.sqlite3",
-        #"NAME": env("db_name"),
-        "ENGINE": "django.db.backends.sqlite3",
-        #"ENGINE": "django.db.backends.mysql",
-        #"USER": env("db_user"),
-        #"PASSWORD": env("db_pass"),
-        #"HOST": env("db_host"),
-        #"PORT": env("db_port"),
+        "NAME": env("db_name"),
+        "ENGINE": "django.db.backends.mysql",
+        "USER": env("db_user"),
+        "PASSWORD": env("db_pass"),
+        "HOST": env("db_host"),
+        "PORT": env("db_port"),
     }
 }
 
@@ -185,4 +183,3 @@ MAINTENANCE_MODE_IGNORE_URLS = env.list("maintenance_ignore_urls")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 FACEBOOK_FORWARD_PROXY = env('facebook_forward_proxy')
-
